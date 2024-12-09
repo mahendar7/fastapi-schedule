@@ -1,8 +1,7 @@
 import threading  # You can use multiprocessing for a separate process
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Request
 from contextlib import asynccontextmanager
 
-import os
 from fastapi.middleware.cors import CORSMiddleware
 from scheduler import run_scheduler
 
@@ -46,7 +45,4 @@ app.include_router(todos.router)
 if __name__ == "__main__":
     import uvicorn
 
-    host = os.getEnv("HOST", "127.0.0.1")
-    port = int(os.getEnv("PORT", 8000))
-
-    uvicorn.run(app, host=host, port=port, root_path="/api", log_level="info")
+    uvicorn.run(app, root_path="/api", log_level="info")
